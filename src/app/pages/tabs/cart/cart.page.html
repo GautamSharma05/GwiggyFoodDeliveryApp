@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title color="tertiary">Cart</ion-title>
+    <ion-buttons slot="start" *ngIf="urlCheck && urlCheck != 'tabs'">
+      <ion-back-button [defaultHref]="getPreviousUrl()"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <ion-img
+          [src]="model?.restaurant?.cover ? model.restaurant.cover : 'assets/images/1.jpg'"
+        ></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <ion-text><h4>{{model?.restaurant?.name}}</h4></ion-text>
+        <ion-note>{{model?.restaurant?.address}}</ion-note>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngFor="let item of model?.items; let i=index">
+      <ion-text color="success">
+        <span class="dotStyle">&#9679;</span>
+      </ion-text>
+
+      <ion-label>
+        <h5>{{item?.name}}</h5>
+      </ion-label>
+      <ion-row>
+        <ion-icon
+          color="success"
+          name="remove-outline"
+          (click)="quantityMinus(i)"
+        ></ion-icon>
+        <ion-text class="ion-text-center quantity" color="success"
+          >{{item?.quantity}}</ion-text
+        >
+        <ion-icon
+          color="success"
+          name="add-outline"
+          (click)="quantityPlus(i)"
+        ></ion-icon>
+      </ion-row>
+      <ion-text slot="end" color="dark" class="price ion-text-right">
+        <h6>₹{{item?.price * item.quantity}}</h6>
+      </ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ion-item lines="none" class="borderBottom">
+    <ion-icon slot="start" name="list-outline"></ion-icon>
+    <ion-input
+      type="text"
+      placeholder="Any Instruction we will try our best"
+      [(ngModel)]="instruction"
+    ></ion-input>
+  </ion-item>
+
+  <ion-list class="borderBottom">
+    <ion-list-header>
+      <ion-label color="tertiary">
+        Bill Detail
+      </ion-label>
+    </ion-list-header>
+    <ion-item lines="none">
+      <ion-label color="dark">
+        Item Total
+      </ion-label>
+      <ion-text slot="end" color="dark">₹ {{model?.totalPrice}}</ion-text>
+    </ion-item>
+    <ion-item lines="fill">
+      <ion-label color="dark">
+        Delivery Fee
+      </ion-label>
+      <ion-text slot="end" color="dark">₹ {{model?.deliveryCharge}}</ion-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label color="dark">
+        To Pay
+      </ion-label>
+      <ion-text slot="end" color="dark"><h5>₹{{model?.grandTotal}}</h5></ion-text>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+

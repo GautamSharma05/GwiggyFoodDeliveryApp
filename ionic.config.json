@@ -1,0 +1,7 @@
+{
+  "name": "gwiggy",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
