@@ -138,6 +138,7 @@ export class CartPage implements OnInit {
       };
       console.log('order: ', data);
       await this.orderServices.placeOrder(data);
+      await this.clearCart();
       this.globalService.successToast('Order Placed Successfully');
       this.navCtrl.navigateRoot(['tabs/account'])
     } catch(e) {
