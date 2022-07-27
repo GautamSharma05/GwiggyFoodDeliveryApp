@@ -1,18 +1,17 @@
 <ion-grid>
   <ion-row>
-    <ion-col>
-      <ion-icon
-        [color]="model?.color ? model.color : 'tertiary'"
+    <ion-col class="ion-text-center">
+      <ion-icon 
         [name]="model?.icon ? model?.icon : 'cart-outline'"
-      ></ion-icon>
+        [color]="model?.color ? model.color : 'tertiary'"></ion-icon>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col class="ion-text-center">
       <ion-label>
-        {{ model?.title ? model.title : "Your Cart is Empty" }}
+        {{model?.title ? model.title : 'Your Cart is Empty'}}
       </ion-label>
-      <ion-text *ngIf="model.subTitle">
+      <ion-text *ngIf="model?.subTitle">
         <p>{{ model.subTitle }}</p>
       </ion-text>
     </ion-col>
