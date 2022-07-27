@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api/api.service';
 
 @Component({
   selector: 'app-home',
@@ -11,49 +12,13 @@ export class HomePage implements OnInit {
   isLoading:boolean=false;
   dummy = Array(10);
 
-  constructor() {}
+  constructor(private api:ApiService) {}
 
   ngOnInit() {
     this.isLoading = true;
     setTimeout(() => {
-      this.banners = [
-        { banner: 'assets/images/1.jpg' },
-        { banner: 'assets/images/2.jpg' },
-        { banner: 'assets/images/3.jpg' },
-      ];
-      this.restaurants = [
-        {
-          uid:'qdnjdvugdugvuggvuggug',
-          cover: 'assets/images/1.jpg',
-          name: 'Burger Farm',
-          cuisines: ['Italian', 'Mexican'],
-          rating: 5,
-          delivery_time: 25,
-          price: 100,
-          distance: 2.5,
-        },
-        {
-          uid:'qdnjdvugdugvuggauggug',
-          cover: 'assets/images/2.jpg',
-          name: 'Burger King',
-          cuisines: ['Italian', 'Mexican'],
-          rating: 4,
-          delivery_time: 15,
-          price: 200,
-          distance: 1.5,
-        },
-        {
-          uid:'qdnjdvugdugvuggbuggug',
-          cover: 'assets/images/3.jpg',
-          name: 'Burger Chacha',
-          cuisines: ['Italian', 'Mexican'],
-          rating: 5,
-          delivery_time: 10,
-          price: 150,
-          distance: .5,
-        },
-       
-      ];
+      this.banners = this.api.banners;
+      this.restaurants = this.api.restaurants;
       this.isLoading =false;
     }, 2000);
    

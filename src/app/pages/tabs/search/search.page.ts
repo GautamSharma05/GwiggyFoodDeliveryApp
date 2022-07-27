@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ApiService } from 'src/app/services/api/api.service';
 
 @Component({
   selector: 'app-search',
@@ -8,51 +9,22 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class SearchPage implements OnInit {
   @ViewChild('searchInput') sInput;
   isLoading: boolean;
+  allRestaurants: any[] = [];
   model:any ={
     icon:'search-outline',
     title:'No Restaurants Record Found',
 
   };
   query: any;
-  allRestaurants: any = [
-    {
-      uid:'qdnjdvugdugvuggvuggug',
-      cover: 'assets/images/1.jpg',
-      name: 'Burger Farm',
-      shortname: 'burger farm',
-      cuisines: ['Italian', 'Mexican'],
-      rating: 5,
-      delivery_time: 25,
-      price: 100,
-    },
-    {
-      uid:'qdnjdvugdugvuggauggug',
-      cover: 'assets/images/2.jpg',
-      name: 'Burger King',
-      shortname: 'burger king',
-      cuisines: ['Italian', 'Mexican'],
-      rating: 4,
-      delivery_time: 15,
-      price: 200,
-    },
-    {
-      uid:'qdnjdvugdugvuggbuggug',
-      cover: 'assets/images/3.jpg',
-      name: 'Burger Chacha',
-      shortname: 'burger chacha',
-      cuisines: ['Italian', 'Mexican'],
-      rating: 5,
-      delivery_time: 10,
-      price: 150,
-    },
-  ];
+  
+  all
+  restaurants:any[] = [];
 
-  restaurants:any = [];
-
-  constructor() {}
+  constructor(private api:ApiService) {}
 
   ngOnInit() {
     setTimeout(() => {
+      this.allRestaurants = this.api.allRestaurants;
       this.sInput.setFocus();
     }, 500);
   }

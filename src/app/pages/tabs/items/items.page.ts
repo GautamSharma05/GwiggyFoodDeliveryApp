@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Storage } from '@capacitor/storage';
+import { ApiService } from 'src/app/services/api/api.service';
 
 @Component({
   selector: 'app-items',
@@ -20,99 +21,18 @@ export class ItemsPage implements OnInit {
     icon: 'fast-food-outline',
     title: 'No Menu Available Right Now',
   };
-  restaurants = [
-    {
-      uid: 'qdnjdvugdugvuggvuggug',
-      cover: 'assets/images/1.jpg',
-      name: 'Burger Farm',
-      address: 'BapuSapalya,Karnatak,INDIA',
-      cuisines: ['Italian', 'Mexican'],
-      rating: 5,
-      delivery_time: 25,
-      price: 100,
-      distance: 2.5,
-    },
-    {
-      uid: 'qdnjdvugdugvuggauggug',
-      cover: 'assets/images/2.jpg',
-      name: 'Burger King',
-      address: 'RaMurthiNagar,Karnatak,INDIA',
-      cuisines: ['Italian', 'Mexican'],
-      rating: 4,
-      delivery_time: 15,
-      price: 200,
-      distance: 1.5,
-    },
-    {
-      uid: 'qdnjdvugdugvuggbuggug',
-      cover: 'assets/images/3.jpg',
-      name: 'Burger Chacha',
-      address: 'Bell Outlet,Karnatak,INDIA',
-      cuisines: ['Italian', 'Mexican'],
-      rating: 5,
-      delivery_time: 10,
-      price: 150,
-      distance: 0.5,
-    },
-  ];
-  categories: any[] = [
-    {
-      id: 'e00',
-      name: 'Italian',
-      uid: 'qdnjdvugdugvuggvuggug',
-    },
-    {
-      id: 'e0',
-      name: 'Mexican',
-      uid: 'qdnjdvugdugvuggvuggug',
-    },
-  ];
-  allItems = [
-    {
-      category_id: 'e00',
-      cover: 'assets/images/pizza.jpg',
-      desc: 'Great in taste,You fall in love with this definitely',
-      id: 'i1',
-      name: 'Pizza',
-      price: 120,
-      rating: 0,
-      status: true,
-      uid: 'qdnjdvugdugvuggvuggug',
-      variation: false,
-      veg: false,
-    },
-    {
-      category_id: 'e0',
-      cover: 'assets/images/salad.jpg',
-      desc: 'Great in taste best in Bengaluru',
-      id: 'i2',
-      name: 'Caprese Salad',
-      price: 200,
-      rating: 0,
-      status: true,
-      uid: 'qdnjdvugdugvuggvuggug',
-      variation: false,
-      veg: true,
-    },
-    {
-      category_id: 'e00',
-      cover: 'assets/images/pasta.jpg',
-      desc: 'Great in taste,You Love This food gwiggy assured',
-      id: 'i3',
-      name: 'Pasta',
-      price: 150,
-      rating: 0,
-      status: true,
-      uid: 'qdnjdvugdugvuggvuggug',
-      variation: false,
-      veg: true,
-    },
-  ];
+
+  restaurants: any[] = [];
+  categories: any[] = [];
+  allItems: any[] = [];
+
+  
 
   constructor(
     private router: ActivatedRoute,
     private navCtrl: NavController,
-    private route: Router
+    private route: Router,
+    private api:ApiService
   ) {}
 
   ngOnInit() {
@@ -122,6 +42,9 @@ export class ItemsPage implements OnInit {
         return;
       }
       this.id = paramMap.get('restaurantId');
+      this.restaurants = this.api.restaurants1;
+      this.allItems = this.api.allItems;
+      this.categories = this.api.categories;
       this.getItem();
     });
   }
